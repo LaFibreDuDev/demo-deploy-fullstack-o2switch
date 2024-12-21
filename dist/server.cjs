@@ -1,1 +1,1 @@
-"use strict";const t=require("express"),s=t(),e=process.env.PORT||3e3;s.get("/",(o,n)=>{n.send("Salut les gens !")});s.listen(e,()=>{console.log(`Server running on http://localhost:${e}`)});
+"use strict";const o=require("express"),e=o(),s=process.env.PORT||3e3;typeof PhusionPassenger<"u"&&PhusionPassenger.configure({autoInstall:!1});e.get("/",(t,n)=>{n.json({message:"Salut les gens !"})});typeof PhusionPassenger<"u"?e.listen("passenger"):e.listen(s,()=>{console.log(`Server running on http://localhost:${s}`)});
