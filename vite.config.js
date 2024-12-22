@@ -11,7 +11,16 @@ export default defineConfig({
         formats: ['cjs'], 
     },
     rollupOptions: {
-        external: ['express'], 
+        external: [
+          'node:util',
+          'express',
+          'cookie-parser',
+          'jsonwebtoken',
+          'jwt-decode',
+          'sequelize',
+          'sqlite3',
+          'zod',
+        ],
         output: {
             format: 'cjs', 
             entryFileNames: '[name].cjs',

@@ -3,13 +3,20 @@
 	"scripts": {
 		"dev": "vite-node src/server.js",
 		"build": "vite build",
-		"start": "node dist/server.cjs"
+		"start": "node dist/server.cjs",
+		"db:reset": "node ./src/models/reset.js"
   	},
 	"devDependencies": {
 		"vite": "^6.0.5",
 		"vite-node": "^2.1.8"
 	},
 	"dependencies": {
-		"express": "^4.21.2"
+		"express": "^4.21.2",
+		"cookie-parser": "^1.4.6",
+		"jsonwebtoken": "^9.0.2",
+		"jwt-decode": "^4.0.0",
+		"sequelize": "^6.37.2",
+		"sqlite3": "^5.1.7",
+		"zod": "^3.23.4"
 	}
 }
