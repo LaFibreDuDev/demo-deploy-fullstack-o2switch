@@ -1,9 +1,10 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import config from "./config.js";
-import * as authController from "./controllers/auth.js";
+import AuthController from "./controllers/AuthController.js";
 import { verifyJwtToken } from "./lib/tokens.js";
 import { jwtDecode } from "jwt-decode";
+import ProjectController from "./controllers/ProjectController.js";
 
 // wrapper o2switch
 if (typeof(PhusionPassenger) !== 'undefined') {
@@ -40,9 +41,13 @@ app.use((req, res, next) => {
 app.use(cookieParser());
 
 // Authentication routes
-app.post("/signup", authController.signupUser);
-app.post("/login", authController.loginUser);
-app.delete("/logout", authController.logout);
+app.post("/signup", AuthController.signupUser);
+app.post("/login", AuthController.loginUser);
+app.delete("/logout", AuthController.logout);
+
+// Ressource project not authenticated
+app.get('/projects', ProjectController.getAllProjects);
+app.get('/projects/:id', ProjectController.getProjectById);
 
 
 // Any API resources

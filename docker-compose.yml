@@ -1,0 +1,37 @@
+services:
+  node:
+    image: node:20-alpine
+    container_name: backend_node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    command: ["/bin/sh", "-c", "npm run db:reset && npx nodemon --watch src --exec 'npm run dev'"]
+    environment:
+      - NODE_ENV=development
+      - DATABASE_DBNAME=portfolio
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=password
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_SSL=false
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    container_name: backend_postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=portfolio
+    ports:
+      - "5434:5432"
+  adminer:
+    image: adminer:latest
+    container_name: backend_adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./adminer-config.php:/var/www/html/adminer-config.php
