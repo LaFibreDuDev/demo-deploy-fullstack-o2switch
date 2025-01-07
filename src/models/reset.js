@@ -8,13 +8,6 @@ const resetDb = async() => {
         await sequelize.dropAllSchemas({ force: true });
         await sequelize.sync({ force: true });
 
-        // Création d'un utilisateur
-        await User.create({
-            username: 'Student',
-            email: 'student@oclock.io',
-            password: await hash('student42oclock')
-        })
-
         // Création de trois projets portfolio
         const projects = [
             {
@@ -34,6 +27,14 @@ const resetDb = async() => {
             },
         ]
         await Project.bulkCreate(projects)
+
+        // Création d'un utilisateur
+        const password = await hash('student42oclock')
+        await User.create({
+            username: 'Student',
+            email: 'student@oclock.io',
+            password: password
+        })
         await sequelize.close()
     } catch(e) {
         console.error('Erreur lors de l\'exécution du script:', e);
