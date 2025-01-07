@@ -21,6 +21,8 @@ export default defineConfig({
           'pg',
           'pg-hstore',
           'zod',
+          'swagger-jsdoc',
+          'swagger-ui-express'
         ],
         output: {
             format: 'cjs', 
