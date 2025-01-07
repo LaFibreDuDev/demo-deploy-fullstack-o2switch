@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { compare, hash } from "../lib/crypto.js";
 import { generateAuthenticationToken } from "../lib/tokens.js";
-import { User } from "../models/index.js";
+import { User } from "../models/user.js";
 
 export default class AuthController {
 

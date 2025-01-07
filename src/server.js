@@ -1,10 +1,15 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import config from "./config.js";
-import AuthController from "./controllers/AuthController.js";
+
 import { verifyJwtToken } from "./lib/tokens.js";
 import { jwtDecode } from "jwt-decode";
-import ProjectController from "./controllers/ProjectController.js";
+
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsDoc from 'swagger-jsdoc';
+
+import authRoutes from './routes/authRoutes.js'
+import projectRoutes from './routes/projectRoutes.js'
 
 // wrapper o2switch
 if (typeof(PhusionPassenger) !== 'undefined') {
@@ -16,6 +21,27 @@ const app = express();
 
 // Client pages (for testing purposes)
 app.use("/", express.static("client"));
+
+// Configuration Swagger
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: '3.0.0', // Utilisation de la version OpenAPI 3.0.0
+    info: {
+      title: 'API Documentation',
+      version: '1.0.0',
+      description: 'Documentation interactive pour mon API',
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000', // Remplace par l'URL de ton API
+        description: 'Serveur local',
+      },
+    ],
+  },
+  apis: ['./src/routes/*.js'], // Fichiers contenant des commentaires de Swagger
+};
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Body parsers
 app.use(express.urlencoded({ extended: true })); // application/x-www-form-urlencoded
@@ -41,25 +67,12 @@ app.use((req, res, next) => {
 app.use(cookieParser());
 
 // Authentication routes
-app.post("/signup", AuthController.signupUser);
-app.post("/login", AuthController.loginUser);
-app.delete("/logout", AuthController.logout);
-
-// Ressource project not authenticated
-app.get('/projects', ProjectController.getAllProjects);
-app.get('/projects/:id', ProjectController.getProjectById);
-
+app.use('/', authRoutes);
+app.use('/projects', projectRoutes);
 
 // Any API resources
 app.get("/public-stuff", getPublicStuff);
-
-// ETAPE 5 - COTE SERVEUR JE RECOIS LA REQUETE DU BACKEND (pour accéder
-// à mes données personnelles), je fais passer la requête par
-// un middleware (isAuthenticated) qui va vérifier le contenu de la requête
-// et m'autoriser ou non à accéder aux données privées
-
 app.get("/private-stuff", isAuthenticated, getPrivateStuff);
-
 app.get("/profile", isAuthenticated, getProfile)
 
 

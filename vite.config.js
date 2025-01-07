@@ -18,7 +18,8 @@ export default defineConfig({
           'jsonwebtoken',
           'jwt-decode',
           'sequelize',
-          'sqlite3',
+          'pg',
+          'pg-hstore',
           'zod',
         ],
         output: {
