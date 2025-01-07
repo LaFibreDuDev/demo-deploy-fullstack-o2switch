@@ -9,13 +9,13 @@ const server = {
 };
 
 const database = {
-  dialect: process.env.DATABASE_DIALECT || "postgres",
-  database: process.env.DATABASE_DBNAME,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  ssl: process.env.DATABASE_SSL || false
+  dialect: import.meta.env.VITE_DATABASE_DIALECT || "postgres",
+  database: import.meta.env.VITE_DATABASE_DBNAME,
+  user: import.meta.env.VITE_DATABASE_USER,
+  password: import.meta.env.VITE_DATABASE_PASSWORD,
+  host: import.meta.env.VITE_DATABASE_HOST,
+  port: import.meta.env.VITE_DATABASE_PORT,
+  ssl: import.meta.env.VITE_DATABASE_SSL || false
 };
 
 const auth = {
