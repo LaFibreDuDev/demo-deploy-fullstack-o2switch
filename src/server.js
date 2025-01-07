@@ -33,8 +33,12 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', // Remplace par l'URL de ton API
+        url: 'http://localhost:3000', 
         description: 'Serveur local',
+      },
+      {
+        url: 'https://backend.lafibredudev.com', 
+        description: 'Serveur de production',
       },
     ],
   },
