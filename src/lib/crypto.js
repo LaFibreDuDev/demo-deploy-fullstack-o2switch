@@ -2,7 +2,6 @@ import crypto from "node:crypto";
 import { promisify } from "node:util";
 import config from "../config.js";
 
-
 export async function hash(password) {
   // Using scrypt algorithm, following OWASP recommendations (https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
   const scrypt = promisify(crypto.scrypt); // Node.js recommends using the async version of scrypt to prevent blocking the event loop. Here we promesify it for readability.

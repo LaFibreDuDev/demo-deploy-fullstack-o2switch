@@ -13,6 +13,7 @@ export default defineConfig({
     rollupOptions: {
         external: [
           'node:util',
+          'node:crypto',
           'express',
           'cookie-parser',
           'jsonwebtoken',
