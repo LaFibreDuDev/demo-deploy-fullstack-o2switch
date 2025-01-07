@@ -1,13 +1,6 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  define: {
-    'process.env.DATABASE_USER': JSON.stringify(process.env.DATABASE_USER),
-    'process.env.DATABASE_PASSWORD': JSON.stringify(process.env.DATABASE_PASSWORD),
-    'process.env.DATABASE_HOST': JSON.stringify(process.env.DATABASE_HOST),
-    'process.env.DATABASE_PORT': JSON.stringify(process.env.DATABASE_PORT),
-    'process.env.DATABASE_SSL': JSON.stringify(process.env.DATABASE_SSL),
-  },
   optimizeDeps: {
     include: ['express'],
   },
@@ -29,7 +22,8 @@ export default defineConfig({
           'pg-hstore',
           'zod',
           'swagger-jsdoc',
-          'swagger-ui-express'
+          'swagger-ui-express',
+          'dotenv'
         ],
         output: {
             format: 'cjs', 
