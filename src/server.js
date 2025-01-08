@@ -24,6 +24,9 @@ app.use("/", express.static("client"));
 
 const protocol = req.protocol === 'https' ? 'https' : 'http';
 
+// Définir l'URL du serveur via le env
+const { url } = config.server;
+
 // Configuration Swagger
 const swaggerOptions = {
   swaggerDefinition: {
@@ -35,8 +38,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `${protocol}://${req.get('host')}`, 
-        description: 'API Serveur',
+        url: url, 
+        description: `API Serveur - ${url}`,
       },
     ],
   },

@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const server = {
+  url: process.env.SERVER_URL || `http://localhost:${process.env.PORT || 3000}`,
   host: process.env.HOST || "0.0.0.0",
   port: process.env.PORT || 3000,
   secure: process.env.SECURE || false
