@@ -22,6 +22,8 @@ const app = express();
 // Client pages (for testing purposes)
 app.use("/", express.static("client"));
 
+const protocol = req.protocol === 'https' ? 'https' : 'http';
+
 // Configuration Swagger
 const swaggerOptions = {
   swaggerDefinition: {
@@ -33,12 +35,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', 
-        description: 'Serveur local',
-      },
-      {
-        url: 'https://backend.lafibredudev.com', 
-        description: 'Serveur de production',
+        url: `${protocol}://${req.get('host')}`, 
+        description: 'API Serveur',
       },
     ],
   },
