@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     outDir: 'dist', 
     lib: {
-        entry: ['src/server.js', 'src/models/reset.js'], 
+        entry: ['src/server.js'], 
         formats: ['cjs'], 
     },
     rollupOptions: {

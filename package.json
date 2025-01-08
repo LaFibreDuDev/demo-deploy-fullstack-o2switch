@@ -4,8 +4,7 @@
 		"dev": "vite-node src/server.js",
 		"build": "vite build",
 		"start": "node dist/server.cjs",
-		"db:reset": "node ./src/models/reset.js",
-		"prod:db:reset": "node dist/reset.cjs"
+		"db:reset": "node ./src/models/reset.js"
 	},
 	"devDependencies": {
 		"nodemon": "^3.1.9",
