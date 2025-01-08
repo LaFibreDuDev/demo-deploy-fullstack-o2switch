@@ -22,8 +22,6 @@ const app = express();
 // Client pages (for testing purposes)
 app.use("/", express.static("client"));
 
-const protocol = req.protocol === 'https' ? 'https' : 'http';
-
 // Définir l'URL du serveur via le env
 const { url } = config.server;
 
