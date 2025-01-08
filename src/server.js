@@ -72,8 +72,10 @@ app.use(cookieParser());
 app.get('/config', (req, res) => {
   const { dialect, database, user, _, dbhost } = config.database;
   const { url, host, port, secure } = config.server;
-  console.log('server', url, host, port, secure)
-  console.log('db', dialect, database, user, dbhost)
+  res.status(200).json({
+    url, host, port, secure,
+    dialect, database, user, dbhost
+  })
 });
 
 // Authentication routes
