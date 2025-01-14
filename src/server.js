@@ -23,7 +23,7 @@ const app = express();
 app.use("/", express.static("client"));
 
 // Définir l'URL du serveur via le env
-const { url } = config.server;
+const { url, cors } = config.server;
 
 // Configuration Swagger
 const swaggerOptions = {
@@ -52,7 +52,7 @@ app.use(express.json()); // application/json
 
 // cors
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', ['http://localhost:5173', 'https://backend.lafibredudev.com']);
+  res.header('Access-Control-Allow-Origin', [cors]);
   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.header('Access-Control-Allow-Credentials', true);
@@ -71,9 +71,9 @@ app.use(cookieParser());
 
 app.get('/config', (req, res) => {
   const { dialect, database, user, _, dbhost } = config.database;
-  const { url, host, port, secure } = config.server;
+  const { url, host, port, secure, cors } = config.server;
   res.status(200).json({
-    url, host, port, secure,
+    url, host, port, secure, cors,
     dialect, database, user, dbhost
   })
 });

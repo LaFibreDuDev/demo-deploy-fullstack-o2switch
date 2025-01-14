@@ -6,7 +6,8 @@ const server = {
   url: process.env.SERVER_URL || `http://localhost:${process.env.PORT || 3000}`,
   host: process.env.HOST || "0.0.0.0",
   port: process.env.PORT || 3000,
-  secure: process.env.SECURE || false
+  secure: process.env.SECURE || false,
+  cors: process.env.CORS || ""
 };
 
 const database = {
