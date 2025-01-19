@@ -31,4 +31,4 @@ User.init({
    * @type {string}
    */
   password: { type: DataTypes.STRING }
-}, { sequelize, timestamps: true });
+}, { sequelize, timestamps: true, tableName: 'Users' });

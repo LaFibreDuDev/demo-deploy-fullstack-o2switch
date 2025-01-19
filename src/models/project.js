@@ -30,4 +30,4 @@ Project.init({
      * @type {string}
      */
     image: { type: DataTypes.STRING }
-}, { sequelize });
+}, { sequelize, tableName: 'Projects' });
