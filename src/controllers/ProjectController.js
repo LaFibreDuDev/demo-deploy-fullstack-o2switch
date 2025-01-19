@@ -38,4 +38,34 @@ export default class ProjectController {
       res.status(500).json({ error: 'An error occurred while fetching the project.' });
     }
   }
+
+  /**
+ * Controller pour ajouter un nouveau projet
+ * @param {object} req - Requête Express
+ * @param {object} res - Réponse Express
+ */
+  static async addProject(req, res) {
+    try {
+      const { name, description, image } = req.body;
+
+      // Validation simple des champs requis
+      if (!name) {
+        return res.status(400).json({ error: 'Le champ "name" est obligatoire.' });
+      }
+
+      // Création du projet
+      const newProject = await Project.create({ name, description, image });
+
+      return res.status(201).json({
+        message: 'Projet créé avec succès !',
+        project: newProject,
+      });
+    } catch (error) {
+      console.error('Erreur lors de la création du projet :', error);
+      return res.status(500).json({
+        error: 'Une erreur est survenue lors de la création du projet.',
+      });
+    }
+  }
+
 }

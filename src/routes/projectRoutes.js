@@ -116,4 +116,90 @@ app.get('/', ProjectController.getAllProjects);
  */
 app.get('/:id', ProjectController.getProjectById);
 
+/**
+ * @swagger
+ * /projects:
+ *   post:
+ *     summary: Créer un nouveau projet
+ *     description: Ajoute un nouveau projet à la base de données.
+ *     tags:
+ *       - Projects
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Le nom du projet
+ *                 example: Mon projet
+ *               description:
+ *                 type: string
+ *                 description: Une courte description du projet
+ *                 example: Ceci est un projet pour tester l'API.
+ *               image:
+ *                 type: string
+ *                 description: URL de l'image associée au projet
+ *                 example: https://example.com/image.png
+ *     responses:
+ *       201:
+ *         description: Projet créé avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Projet créé avec succès !
+ *                 project:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     name:
+ *                       type: string
+ *                       example: Mon projet
+ *                     description:
+ *                       type: string
+ *                       example: Ceci est un projet pour tester l'API.
+ *                     image:
+ *                       type: string
+ *                       example: https://example.com/image.png
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: 2025-01-19T12:34:56.789Z
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: 2025-01-19T12:34:56.789Z
+ *       400:
+ *         description: Requête invalide (ex : champ manquant).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Le champ "name" est obligatoire.
+ *       500:
+ *         description: Erreur interne du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Une erreur est survenue lors de la création du projet.
+ */
+app.post('/', ProjectController.addProject);
+
 export default app;
