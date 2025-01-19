@@ -202,4 +202,146 @@ app.get('/:id', ProjectController.getProjectById);
  */
 app.post('/', ProjectController.addProject);
 
+/**
+ * @swagger
+ * /projects/{id}:
+ *   put:
+ *     summary: Modifier un projet existant
+ *     description: Met à jour les informations d'un projet en fonction de son ID.
+ *     tags:
+ *       - Projects
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du projet à modifier
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Nouveau nom du projet
+ *                 example: Projet mis à jour
+ *               description:
+ *                 type: string
+ *                 description: Nouvelle description du projet
+ *                 example: Ceci est une description mise à jour.
+ *               image:
+ *                 type: string
+ *                 description: Nouvelle URL de l'image du projet
+ *                 example: https://example.com/new-image.png
+ *     responses:
+ *       200:
+ *         description: Projet mis à jour avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Projet mis à jour avec succès !
+ *                 project:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     name:
+ *                       type: string
+ *                       example: Projet mis à jour
+ *                     description:
+ *                       type: string
+ *                       example: Ceci est une description mise à jour.
+ *                     image:
+ *                       type: string
+ *                       example: https://example.com/new-image.png
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: 2025-01-19T12:34:56.789Z
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *                       example: 2025-01-19T13:00:00.000Z
+ *       404:
+ *         description: Projet non trouvé.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Projet non trouvé.
+ *       500:
+ *         description: Erreur interne du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Une erreur est survenue lors de la mise à jour du projet.
+ */
+app.put('/:id', ProjectController.updateProject);
+
+/**
+ * @swagger
+ * /projects/{id}:
+ *   delete:
+ *     summary: Supprimer un projet
+ *     description: Supprime un projet existant en fonction de son ID.
+ *     tags:
+ *       - Projects
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du projet à supprimer
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *     responses:
+ *       200:
+ *         description: Projet supprimé avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Projet supprimé avec succès !
+ *       404:
+ *         description: Projet non trouvé.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Projet non trouvé.
+ *       500:
+ *         description: Erreur interne du serveur.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Une erreur est survenue lors de la suppression du projet.
+ */
+app.delete('/:id', ProjectController.deleteProject);
+
 export default app;
