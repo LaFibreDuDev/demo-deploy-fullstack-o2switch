@@ -180,7 +180,7 @@ app.get('/:id', ProjectController.getProjectById);
  *                       format: date-time
  *                       example: 2025-01-19T12:34:56.789Z
  *       400:
- *         description: Requête invalide (ex : champ manquant).
+ *         description: Requete invalide
  *         content:
  *           application/json:
  *             schema:
