@@ -79,7 +79,7 @@ app.get('/config', (req, res) => {
 });
 
 // Authentication routes
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/projects', projectRoutes);
 
 // Any API resources
