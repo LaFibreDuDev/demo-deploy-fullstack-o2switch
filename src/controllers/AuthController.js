@@ -40,7 +40,7 @@ export default class AuthController {
 
   static async loginUser(req, res) {
     // Body validation
-    const { data, error } = await buildLoginBodySchema().safeParseAsync(req.body);
+    const { data, error } = await this.buildLoginBodySchema().safeParseAsync(req.body);
     if (error) { return res.status(400).json({ status: 400, message: error.message }); }
 
     const { email, password } = data;
