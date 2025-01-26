@@ -11,7 +11,7 @@ export default class AuthController {
 
   static async signupUser(req, res) {
     // Body validation
-    const { data, error } = await this.buildSignupBodySchema().safeParseAsync(req.body);
+    const { data, error } = await buildSignupBodySchema().safeParseAsync(req.body);
     if (error) { return res.status(400).json({ status: 400, message: error.message }); }
 
     const { username, email, password } = data;
@@ -40,7 +40,7 @@ export default class AuthController {
 
   static async loginUser(req, res) {
     // Body validation
-    const { data, error } = await this.buildLoginBodySchema().safeParseAsync(req.body);
+    const { data, error } = await buildLoginBodySchema().safeParseAsync(req.body);
     if (error) { return res.status(400).json({ status: 400, message: error.message }); }
 
     const { email, password } = data;
@@ -58,7 +58,7 @@ export default class AuthController {
     console.log(accessToken)
 
     // Client reponse
-    this.sendTokensResponse(res, { user, accessToken });
+    sendTokensResponse(res, { user, accessToken });
   }
 
   // ============================================================
@@ -68,38 +68,38 @@ export default class AuthController {
   static async logout(_, res) {
     res.status(204).json({ status: 204, message: "Successfully logged out"});
   }
+}
 
-  // ============================================================
-  // ====================== BODY SCHEMA =========================
-  // ============================================================
+// ============================================================
+// ====================== BODY SCHEMA =========================
+// ============================================================
 
-  buildSignupBodySchema() {
-    return z.object({
-      username: z.string().min(1),
-      email: z.string().min(1).email(),
-      password: z.string().min(8)
-    });
-  }
+function buildSignupBodySchema() {
+  return z.object({
+    username: z.string().min(1),
+    email: z.string().min(1).email(),
+    password: z.string().min(8)
+  });
+}
 
-  buildLoginBodySchema() {
-    return z.object({
-      email: z.string().email(),
-      password: z.string()
-    });
-  }
+  
+function buildLoginBodySchema() {
+  return z.object({
+    email: z.string().email(),
+    password: z.string()
+  });
+}
 
+// ============================================================
+// =================== RESPONSE HANDLING ======================
+// ============================================================
 
-  // ============================================================
-  // =================== RESPONSE HANDLING ======================
-  // ============================================================
-
-  sendTokensResponse(res, { user, accessToken, refreshToken, csrfToken }) {
-    // Send reply (to ease client handling)
-    res.json({
-      username: user.username,
-      accessToken: accessToken.token,
-      accessTokenType: accessToken.type,
-      accessTokenExpiresAt: accessToken.expiresAt,
-    });
-  }
+function sendTokensResponse(res, { user, accessToken, refreshToken, csrfToken }) {
+  // Send reply (to ease client handling)
+  res.json({
+    username: user.username,
+    accessToken: accessToken.token,
+    accessTokenType: accessToken.type,
+    accessTokenExpiresAt: accessToken.expiresAt,
+  });
 }
