@@ -18,6 +18,8 @@ services:
       - DATABASE_SSL=false
     depends_on:
       - postgres
+    networks:
+      - backend_portfolio
   postgres:
     image: postgres:latest
     container_name: backend_postgres
@@ -25,6 +27,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=portfolio
+    networks:
+      - backend_portfolio
     #ports:
     #  - "5434:5432"
   adminer:
@@ -35,3 +39,9 @@ services:
     #  - "8080:8080"
     volumes:
       - ./adminer-config.php:/var/www/html/adminer-config.php
+    networks:
+      - backend_portfolio
+
+networks:
+  backend_portfolio:
+    driver: bridge
