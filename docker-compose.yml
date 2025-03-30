@@ -31,7 +31,7 @@ services:
     image: adminer:latest
     container_name: backend_adminer
     restart: always
-    ports:
-      - "8080:8080"
+    #ports:
+    #  - "8080:8080"
     volumes:
       - ./adminer-config.php:/var/www/html/adminer-config.php
