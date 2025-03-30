@@ -7,7 +7,7 @@ services:
       - ./:/app
     #ports:
     #  - "3000:3000"
-    command: ["/bin/sh", "-c", "npm run db:reset && npx nodemon --watch src --exec 'npm run dev'"]
+    command: ["/bin/sh", "-c", "npm install && npm run db:reset && npx nodemon --watch src --exec 'npm run dev'"]
     environment:
       - NODE_ENV=development
       - DATABASE_DBNAME=portfolio
