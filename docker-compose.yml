@@ -13,7 +13,7 @@ services:
       - DATABASE_DBNAME=portfolio
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD=password
-      - DATABASE_HOST=backend_postgres
+      - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
       - DATABASE_SSL=false
     depends_on:
