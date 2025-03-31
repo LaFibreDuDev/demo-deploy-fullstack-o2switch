@@ -17,6 +17,7 @@ services:
       - DATABASE_PORT=5432
       - DATABASE_SSL=false
       - SERVER_URL=https://backend.lafibredudev.com
+      - CORS=http://localhost:5173,https://portfolio.lafibredudev.com
     depends_on:
       - postgres
     networks:
